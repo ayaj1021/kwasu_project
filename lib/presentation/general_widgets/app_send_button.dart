@@ -46,7 +46,7 @@ class _AppSendButtonState extends State<AppSendButton> {
           decoration: BoxDecoration(
               color: widget.isEnabled
                   ? widget.backgroundColor
-                  : AppColors.secondaryColor,
+                  : AppColors.secondaryColor.withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(10),
               border: Border.fromBorderSide(
                 widget.hasBorder

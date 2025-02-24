@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kwasu_app/core/navigation/router.dart';
 import 'package:kwasu_app/core/theme/colors.dart';
+import 'package:kwasu_app/presentation/general_widgets/app_overlay.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _controller = OverLayController();
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -18,11 +25,24 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, c) {
-          return MaterialApp(
-            theme: ThemeData(scaffoldBackgroundColor: AppColors.primaryE3F5E3),
-            debugShowCheckedModeBanner: false,
-            routes: AppRouter.routes,
-            initialRoute: '/',
+          return GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: AppOverLay(
+                controller: _controller,
+                child: MaterialApp(
+                  theme: ThemeData(
+                      scaffoldBackgroundColor: AppColors.primaryE3F5E3),
+                  debugShowCheckedModeBanner: false,
+                  routes: AppRouter.routes,
+                  initialRoute: '/',
+                ),
+              ),
+            ),
           );
         });
   }

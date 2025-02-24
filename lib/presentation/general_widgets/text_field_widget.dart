@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:kwasu_app/core/theme/app_text.dart';
 import 'package:kwasu_app/core/theme/colors.dart';
 
-class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget(
-      {super.key, required this.title, required this.hintText});
+class AppTextFieldWidget extends StatelessWidget {
+  const AppTextFieldWidget(
+      {super.key,
+      required this.title,
+      required this.hintText,
+      required this.controller});
   final String title;
   final String hintText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +19,7 @@ class TextFieldWidget extends StatelessWidget {
         Column(
           children: [
             SizedBox(
-              height: 37,
+              height: 30,
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -25,6 +29,7 @@ class TextFieldWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextField(
+                controller: controller,
                 decoration: InputDecoration(
                     hintText: hintText,
                     hintStyle: TextStyle(
