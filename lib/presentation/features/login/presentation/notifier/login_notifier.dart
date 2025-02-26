@@ -32,8 +32,10 @@ class LoginNotifier extends AutoDisposeNotifier<BaseState<Data>> {
 
       final token = value.data?.access;
       final refreshToken = value.data?.refresh;
+      final userId = value.data?.id;
       await _secureStorageService.writeAccessToken(token: token);
       await _secureStorageService.writeRefreshToken(token: refreshToken);
+      await _secureStorageService.writeUserId(token: userId);
 
       state = state.copyWith(state: LoadState.success, data: value.data);
       onSuccess(value.message ?? '');
