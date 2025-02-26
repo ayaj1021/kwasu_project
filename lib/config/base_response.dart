@@ -1,23 +1,23 @@
 class BaseResponse<T> {
-  final bool success;
+  final bool status;
   final String? message;
   final T? data;
 
   BaseResponse({
-    required this.success,
+    required this.status,
     this.message,
     this.data,
   });
 
   factory BaseResponse.fromMap(Map<String, dynamic> json) => BaseResponse<T>(
-        success: json["success"],
-        message: json["message"] != null && json["message"]["desc"] != null
-            ? json["message"]["desc"]
+        status: json["status"],
+        message: json["message"] != null && json["message"] != null
+            ? json["message"]
             : '',
         data: json["data"],
       );
 
   @override
   String toString() =>
-      'BaseResponse(success: $success, message: $message, data: $data)';
+      'BaseResponse(success: $status, message: $message, data: $data)';
 }

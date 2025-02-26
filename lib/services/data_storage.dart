@@ -32,4 +32,21 @@ class SecureStorageService {
       debugPrint('error trying to write access token $e $s');
     }
   }
+
+  Future<String?> readRefreshToken() async {
+    try {
+      return await _flutterSecureStorage.read(key: _accesskey);
+    } catch (e, s) {
+      debugPrint('error trying to read access token $e, $s');
+      return null;
+    }
+  }
+
+  Future<void> writeRefreshToken({String? token}) async {
+    try {
+      await _flutterSecureStorage.write(key: _accesskey, value: token);
+    } catch (e, s) {
+      debugPrint('error trying to write access token $e $s');
+    }
+  }
 }

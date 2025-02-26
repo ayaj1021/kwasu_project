@@ -7,14 +7,14 @@ import 'package:kwasu_app/utils/enums.dart';
 
 import '../../../../../config/base_state.dart';
 
-class LoginNotifier extends AutoDisposeNotifier<BaseState<LoginResponse>> {
+class LoginNotifier extends AutoDisposeNotifier<BaseState<Data>> {
   LoginNotifier();
 
   late LoginRepository _loginRepository;
   final SecureStorageService _secureStorageService = SecureStorageService();
 
   @override
-  BaseState<LoginResponse> build() {
+  BaseState<Data> build() {
     _loginRepository = ref.read(loginRepositoryProvider);
     return BaseState.initial();
   }
@@ -28,22 +28,23 @@ class LoginNotifier extends AutoDisposeNotifier<BaseState<LoginResponse>> {
 
     try {
       final value = await _loginRepository.login(data);
-      if (!value.success) throw value.message ?? '';
+      if (!value.status) throw value.message ?? '';
 
-      final token = value.data!.access?.replaceFirst('Bearer ', '').trim();
+      final token = value.data?.access;
+      final refreshToken = value.data?.refresh;
       await _secureStorageService.writeAccessToken(token: token);
+      await _secureStorageService.writeRefreshToken(token: refreshToken);
 
       state = state.copyWith(state: LoadState.success, data: value.data);
-      onSuccess(value.message!.toString());
+      onSuccess(value.message ?? '');
     } catch (e) {
-      state =
-          state.copyWith(state: LoadState.error, errorMessage: e.toString());
+      state = state.copyWith(state: LoadState.error);
       onError(e.toString());
     }
   }
 }
 
 final loginNotifier =
-    NotifierProvider.autoDispose<LoginNotifier, BaseState<LoginResponse>>(
+    NotifierProvider.autoDispose<LoginNotifier, BaseState<Data>>(
   LoginNotifier.new,
 );

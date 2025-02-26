@@ -10,16 +10,16 @@ import 'package:kwasu_app/services/api_service.dart';
 class LoginRepository {
   LoginRepository(this._networkService);
   final ApiService _networkService;
-  Future<BaseResponse<LoginResponse>> login(LoginRequest request) async {
+  Future<BaseResponse<Data>> login(LoginRequest request) async {
     try {
       final res = await _networkService.postRequest(
         endpoint: AppConstants.login,
         requestBody: request.toJson(),
       );
 
-      return BaseResponse<LoginResponse>(
-        success: res.success,
-        data: LoginResponse.fromJson(res.data),
+      return BaseResponse<Data>(
+        status: res.status,
+        data: Data.fromJson(res.data),
         message: res.message,
       );
     } on DioException catch (e) {

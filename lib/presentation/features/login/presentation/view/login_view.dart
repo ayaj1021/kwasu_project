@@ -6,6 +6,7 @@ import 'package:kwasu_app/core/utils/spacing.dart';
 import 'package:kwasu_app/presentation/features/dashboard/presentation/view/dashboard_view.dart';
 import 'package:kwasu_app/presentation/features/login/data/model/login_request.dart';
 import 'package:kwasu_app/presentation/features/login/presentation/notifier/login_notifier.dart';
+import 'package:kwasu_app/presentation/features/sign_up/presentation/view/sign_up_view.dart';
 import 'package:kwasu_app/presentation/general_widgets/app_send_button.dart';
 import 'package:kwasu_app/presentation/general_widgets/auth_header.dart';
 import 'package:kwasu_app/presentation/general_widgets/text_field_widget.dart';
@@ -63,10 +64,11 @@ class _LoginViewState extends ConsumerState<LoginView> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               child: Column(
                 children: [
-                  const AuthHeader(
+                  AuthHeader(
                     title: 'Welcome back',
                     subTitle: 'Don\'t have an account?',
                     textButton: 'Sign up',
+                    onTap: () => context.pushNamed(SignUpView.routeName),
                   ),
                   const VerticalSpacing(16),
                   AppTextFieldWidget(

@@ -13,14 +13,14 @@ class AppException implements Exception {
     if (e.response != null && DioExceptionType.badResponse == e.type) {
       if ((e.response?.statusCode ?? 0) >= 500) {
         return BaseResponse(
-          success: false,
+          status: false,
           message: 'A server error occurred',
           data: data,
         );
       }
       if (e.response?.statusCode == 413) {
         return BaseResponse(
-          success: false,
+          status: false,
           message: 'File size too large',
           data: data,
         );
@@ -47,7 +47,7 @@ class AppException implements Exception {
       // }
     }
     return BaseResponse(
-      success: false,
+      status: false,
       data: data,
       message: _mapException(e.type),
     );
