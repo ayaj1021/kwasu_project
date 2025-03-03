@@ -29,6 +29,13 @@ class PracticalInformationSection extends StatelessWidget {
                 'List of Available Practical',
                 style: AppTextStyles.headlineSmall
                     .copyWith(fontSize: 12, color: AppColors.black),
+              ),
+              VerticalSpacing(12),
+              Row(
+                children: [
+                  Text('Task'),
+                  Text('Due Date'),
+                ],
               )
             ],
           ),
