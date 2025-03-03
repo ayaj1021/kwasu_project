@@ -26,7 +26,7 @@ class _AppLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: LoadingAnimationWidget.halfTriangleDot(
-        color: AppColors.primaryColor,
+        color: AppColors.secondaryColor,
         size: 50,
       ),
     );

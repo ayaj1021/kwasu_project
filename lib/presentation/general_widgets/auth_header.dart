@@ -10,10 +10,12 @@ class AuthHeader extends StatelessWidget {
       {super.key,
       required this.title,
       required this.subTitle,
-      required this.textButton});
+      required this.textButton,
+      this.onTap});
   final String title;
   final String subTitle;
   final String textButton;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +50,16 @@ class AuthHeader extends StatelessWidget {
                   .copyWith(fontSize: 16, color: AppColors.primary6E6E6E),
             ),
             HorizontalSpacing(4),
-            Text(
-              textButton,
-              style: AppTextStyles.headlineLarge.copyWith(
-                fontSize: 18,
-                color: AppColors.primaryColor,
-                decoration: TextDecoration.underline,
-                decorationColor: AppColors.primaryColor,
+            GestureDetector(
+              onTap: onTap,
+              child: Text(
+                textButton,
+                style: AppTextStyles.headlineLarge.copyWith(
+                  fontSize: 18,
+                  color: AppColors.primaryColor,
+                  decoration: TextDecoration.underline,
+                  decorationColor: AppColors.primaryColor,
+                ),
               ),
             ),
           ],
