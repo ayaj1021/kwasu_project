@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kwasu_app/core/utils/spacing.dart';
-import 'package:kwasu_app/presentation/features/dashboard/presentation/notifier/get_user_details_notifier.dart';
-import 'package:kwasu_app/presentation/features/dashboard/presentation/widgets/dashboard_header.dart';
-import 'package:kwasu_app/presentation/features/dashboard/presentation/widgets/group_info_section.dart';
-import 'package:kwasu_app/presentation/features/dashboard/presentation/widgets/pratical_information_section.dart';
-import 'package:kwasu_app/presentation/features/dashboard/presentation/widgets/task_completion_graph.dart';
-import 'package:kwasu_app/presentation/general_widgets/custom_app_bar.dart';
-import 'package:kwasu_app/services/data_storage.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kwasu_app/core/theme/app_text.dart';
+import 'package:kwasu_app/core/theme/colors.dart';
+import 'package:kwasu_app/presentation/features/attendance/presentation/view/attendance_view.dart';
+import 'package:kwasu_app/presentation/features/home/presentation/view/home_view.dart';
+import 'package:kwasu_app/presentation/features/profile/presentation/view/profile_view.dart';
+import 'package:kwasu_app/presentation/features/skill/presentation/view/skill_view.dart';
 
 class DashboardView extends ConsumerStatefulWidget {
   const DashboardView({super.key});
@@ -18,47 +17,58 @@ class DashboardView extends ConsumerStatefulWidget {
 }
 
 class _DashboardViewState extends ConsumerState<DashboardView> {
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      getUserDetails();
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    HomeView(),
+    SkillView(),
+    AttendanceView(),
+    ProfileView()
+  ];
+
+  void changeIndex(int index) {
+    setState(() {
+      _selectedIndex = index;
     });
-
-    super.initState();
-  }
-
-  getUserDetails() async {
-    final userId = await SecureStorageService().readUserId();
-    await ref
-        .read(getUserDetailsNotifier.notifier)
-        .getUserDetails(id: '$userId');
   }
 
   @override
   Widget build(BuildContext context) {
-    final userName = ref.watch(getUserDetailsNotifier.select((v) => v.data));
     return Scaffold(
-      appBar: CustomAppBar(
-        backgroundColor: Colors.transparent,
-        userName: '${userName?.firstName} ${userName?.lastName}',
-        userLevel: '${userName?.level} lvl',
-        userCourse: '',
-      ),
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            DashBoardHeader(userName: userName),
-            VerticalSpacing(11),
-            GroupInfoSection(),
-            VerticalSpacing(19),
-            TaskCompletionGraph(),
-            VerticalSpacing(10),
-            PracticalInformationSection()
-          ],
-        ),
-      )),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          elevation: 0,
+          type: BottomNavigationBarType.fixed,
+          selectedLabelStyle: AppTextStyles.bodysmall.copyWith(
+            fontWeight: FontWeight.w600,
+            color: AppColors.primaryColor,
+          ),
+          unselectedLabelStyle: AppTextStyles.bodysmall.copyWith(
+            fontWeight: FontWeight.w600,
+            color: AppColors.primaryColor,
+          ),
+          onTap: changeIndex,
+          items: [
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/home.svg'),
+                label: 'Home',
+                activeIcon: SvgPicture.asset('assets/icons/home_filled.svg')),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/skill.svg'),
+                label: 'Skill',
+                activeIcon: SvgPicture.asset('assets/icons/skill_filled.svg')),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/attendance.svg'),
+                label: 'Attendance',
+                activeIcon:
+                    SvgPicture.asset('assets/icons/attendance_filled.svg')),
+            BottomNavigationBarItem(
+                icon: SvgPicture.asset('assets/icons/profile.svg'),
+                label: 'Profile',
+                activeIcon:
+                    SvgPicture.asset('assets/icons/profile_filled.svg')),
+          ]),
     );
   }
 }

@@ -1,0 +1,2 @@
+C:/Users/Owner/Desktop/Apps/kwasu_project/android/app/.cxx/Debug/u1m95s4d/x86/CMakeFiles/edit_cache.dir
+C:/Users/Owner/Desktop/Apps/kwasu_project/android/app/.cxx/Debug/u1m95s4d/x86/CMakeFiles/rebuild_cache.dir

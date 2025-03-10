@@ -40,6 +40,7 @@ class _MyAppState extends State<MyApp> {
                   debugShowCheckedModeBanner: false,
                   routes: AppRouter.routes,
                   initialRoute: '/',
+                  // home: DashboardView(),
                 ),
               ),
             ),

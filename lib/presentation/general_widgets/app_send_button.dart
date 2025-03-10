@@ -54,7 +54,7 @@ class _AppSendButtonState extends State<AppSendButton> {
                     : BorderSide.none,
               )),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 128, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 128, vertical: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

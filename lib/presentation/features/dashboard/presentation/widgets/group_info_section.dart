@@ -70,7 +70,7 @@ class GroupInfoContainer extends StatelessWidget {
                 decoration: BoxDecoration(
                     border: Border.all(
                       width: 4,
-                      color: AppColors.secondaryColor,
+                      color: Colors.transparent,
                     ),
                     shape: BoxShape.circle),
                 child: SvgPicture.asset(icon),

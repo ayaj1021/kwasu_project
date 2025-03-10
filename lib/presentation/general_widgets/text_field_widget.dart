@@ -7,9 +7,13 @@ class AppTextFieldWidget extends StatelessWidget {
       {super.key,
       required this.title,
       required this.hintText,
-      required this.controller});
+      required this.controller,
+      this.enabled,
+      this.suffix});
   final String title;
   final String hintText;
+  final bool? enabled;
+  final Widget? suffix;
   final TextEditingController controller;
 
   @override
@@ -29,9 +33,11 @@ class AppTextFieldWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextField(
+                enabled: enabled,
                 controller: controller,
                 decoration: InputDecoration(
                     hintText: hintText,
+                    suffixIcon: suffix,
                     hintStyle: TextStyle(
                       fontSize: 14,
                       color: Colors.grey,
