@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kwasu_app/core/theme/colors.dart';
 import 'package:kwasu_app/core/utils/spacing.dart';
-import 'package:kwasu_app/presentation/features/dashboard/presentation/notifier/get_user_details_notifier.dart';
+import 'package:kwasu_app/presentation/features/home/presentation/notifier/get_user_details_notifier.dart';
+import 'package:kwasu_app/presentation/features/skill/presentation/notifier/get_all_skills_notifier.dart';
 import 'package:kwasu_app/presentation/features/skill/presentation/widgets/course_code_section.dart';
-import 'package:kwasu_app/presentation/features/skill/presentation/widgets/course_group_section.dart';
-import 'package:kwasu_app/presentation/general_widgets/app_send_button.dart';
 import 'package:kwasu_app/presentation/general_widgets/custom_app_bar.dart';
 
 class SkillView extends ConsumerStatefulWidget {
@@ -16,6 +15,15 @@ class SkillView extends ConsumerStatefulWidget {
 }
 
 class _SkillViewState extends ConsumerState<SkillView> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.read(getAllSkillsNotifier.notifier).getAllSkills();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final userName = ref.watch(getUserDetailsNotifier.select((v) => v.data));
@@ -35,9 +43,8 @@ class _SkillViewState extends ConsumerState<SkillView> {
             children: [
               CourseCodeSection(),
               VerticalSpacing(12),
-              CourseGroupSection(),
+              //  CourseGroupSection(),
               VerticalSpacing(26),
-              AppSendButton(onTap: () {}, title: 'Proceed')
             ],
           ),
         ),

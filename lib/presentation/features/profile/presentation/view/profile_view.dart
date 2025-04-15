@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kwasu_app/core/theme/app_text.dart';
 import 'package:kwasu_app/core/theme/colors.dart';
 import 'package:kwasu_app/core/utils/spacing.dart';
-import 'package:kwasu_app/presentation/features/dashboard/presentation/notifier/get_user_details_notifier.dart';
+import 'package:kwasu_app/presentation/features/home/presentation/notifier/get_user_details_notifier.dart';
 import 'package:kwasu_app/presentation/features/profile/presentation/widgets/profile_input_section.dart';
 import 'package:kwasu_app/presentation/general_widgets/app_send_button.dart';
 import 'package:kwasu_app/presentation/general_widgets/custom_app_bar.dart';

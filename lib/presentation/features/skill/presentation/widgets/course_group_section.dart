@@ -103,9 +103,9 @@ class _CourseGroupSectionState extends ConsumerState<CourseGroupSection> {
 final List<String> courseGroups = [
   'TAILORING',
   'HAIR DRESSING',
-  'ADIRE',
-  'AUTO CAD',
-  'BLOCK MAKING',
-  'WEB DESIGN AND APP DESIGN',
-  'POULTRY',
+  // 'ADIRE',
+  // 'AUTO CAD',
+  // 'BLOCK MAKING',
+  // 'WEB DESIGN AND APP DESIGN',
+  // 'POULTRY',
 ];

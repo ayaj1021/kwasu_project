@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kwasu_app/core/theme/app_text.dart';
 import 'package:kwasu_app/core/theme/colors.dart';
 import 'package:kwasu_app/core/utils/spacing.dart';
-import 'package:kwasu_app/presentation/features/dashboard/data/model/user_details_response.dart';
+import 'package:kwasu_app/presentation/features/home/data/model/user_details_response.dart';
 
 class DashBoardHeader extends StatelessWidget {
   const DashBoardHeader({

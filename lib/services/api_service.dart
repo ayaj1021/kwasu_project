@@ -66,7 +66,7 @@ class ApiService {
   Future<BaseResponse<T>> postRequest<T>(
       {String? endpoint,
       Map<String, dynamic>? query,
-      //  bool isProtected = true,
+      bool isProtected = true,
       Object? requestBody}) async {
     try {
       final response = await _dio.post(
@@ -74,9 +74,9 @@ class ApiService {
         queryParameters: query,
         data: requestBody,
         options: Options(
-          sendTimeout: const Duration(minutes: 2),
-          validateStatus: (status) => status! < 500,
-        ),
+            sendTimeout: const Duration(minutes: 2),
+            validateStatus: (status) => status! < 500,
+            headers: isProtected ? await _fetchHeaders() : null),
       );
       //  Options(headers: isProtected ? await _fetchHeaders() : null));
       return BaseResponse.fromMap(response.data);

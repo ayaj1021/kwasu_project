@@ -16,6 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.elevation = 0,
     this.centerTitle,
     this.backgroundColor,
+    this.onLeadingTap,
   });
   final Widget? titleWidget;
   final Widget? leading;
@@ -27,17 +28,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double elevation;
   final bool? centerTitle;
   final Color? backgroundColor;
+  final VoidCallback? onLeadingTap;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: backgroundColor,
-      leading: leading ??
-          SvgPicture.asset(
-            'assets/icons/menu_icon.svg',
-            fit: BoxFit.scaleDown,
-          ),
+      leading: GestureDetector(
+        onTap: onLeadingTap ?? () => Scaffold.of(context).openDrawer(),
+        child: leading ??
+            SvgPicture.asset(
+              'assets/icons/menu_icon.svg',
+              fit: BoxFit.scaleDown,
+            ),
+      ),
       actions: [
         Column(
           children: [

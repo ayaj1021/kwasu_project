@@ -4,6 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kwasu_app/core/theme/app_text.dart';
 import 'package:kwasu_app/core/theme/colors.dart';
 import 'package:kwasu_app/core/utils/spacing.dart';
+import 'package:kwasu_app/presentation/features/skill/presentation/notifier/get_all_skills_notifier.dart';
+import 'package:kwasu_app/presentation/features/skill/presentation/view/skill_details_view.dart';
+import 'package:kwasu_app/presentation/general_widgets/app_send_button.dart';
 import 'package:kwasu_app/presentation/general_widgets/search_bar_widget.dart';
 
 class CourseCodeSection extends ConsumerStatefulWidget {
@@ -21,24 +24,30 @@ class _CourseCodeSectionState extends ConsumerState<CourseCodeSection> {
   @override
   void initState() {
     super.initState();
-    filteredCourseCodes = List.from(courseCodes);
-  }
 
-  List<String> filteredCourseCodes = [];
-  void _filterCourseCodes(String query) {
-    setState(() {
-      if (query.isEmpty) {
-        filteredCourseCodes = List.from(courseCodes);
-      } else {
-        filteredCourseCodes = courseCodes
-            .where((code) => code.toLowerCase().contains(query.toLowerCase()))
-            .toList();
-      }
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.read(getAllSkillsNotifier.notifier).getAllSkills();
     });
   }
 
+  String _searchQuery = '';
+  String courseTitle = '';
+  String coursePrice = '';
   @override
   Widget build(BuildContext context) {
+    final skillSet =
+        ref.watch(getAllSkillsNotifier.select((v) => v.data ?? []));
+
+    List<String?> filteredCourseCodes =
+
+        //skills.where((skill) {
+        skillSet.map((e) => e.code).where((skill) {
+      final matchesSearch =
+          _searchQuery.isEmpty || (skill!.toLowerCase().contains(_searchQuery));
+
+      return matchesSearch;
+    }).toList();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -51,7 +60,11 @@ class _CourseCodeSectionState extends ConsumerState<CourseCodeSection> {
         SearchBarWidget(
             hintText: 'Select course code',
             searchController: _searchController,
-            onChanged: _filterCourseCodes),
+            onChanged: (query) {
+              setState(() {
+                _searchQuery = query.toLowerCase();
+              });
+            }),
         VerticalSpacing(5),
         Container(
             decoration: BoxDecoration(
@@ -70,13 +83,21 @@ class _CourseCodeSectionState extends ConsumerState<CourseCodeSection> {
                         onTap: () {
                           setState(() {
                             _selectedIndex = index;
+                            courseTitle = skillSet
+                                    .firstWhere((e) => e.code == code)
+                                    .title ??
+                                '';
+                            coursePrice = skillSet
+                                    .firstWhere((e) => e.code == code)
+                                    .price ??
+                                '';
                           });
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              code,
+                              code ?? '',
                               style: AppTextStyles.headlineMedium
                                   .copyWith(fontSize: 13),
                             ),
@@ -91,7 +112,24 @@ class _CourseCodeSectionState extends ConsumerState<CourseCodeSection> {
                     VerticalSpacing(10),
                     Divider(
                       color: AppColors.primaryA4D4E0,
-                    )
+                    ),
+                    VerticalSpacing(40),
+                    AppSendButton(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (_) {
+                                return AlertDialog(
+                                  contentPadding: EdgeInsets.zero,
+                                  content: SkillDetailsView(
+                                    courseCode: code ?? '',
+                                    courseTitle: courseTitle,
+                                    courseAmount: coursePrice,
+                                  ),
+                                );
+                              });
+                        },
+                        title: 'Proceed')
                   ],
                 );
               }),

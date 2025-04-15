@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kwasu_app/presentation/features/dashboard/data/model/user_details_response.dart';
-import 'package:kwasu_app/presentation/features/dashboard/data/repository/user_details_repository.dart';
+import 'package:kwasu_app/presentation/features/home/data/model/user_details_response.dart';
+import 'package:kwasu_app/presentation/features/home/data/repository/user_details_repository.dart';
 import 'package:kwasu_app/utils/enums.dart';
 
 import '../../../../../config/base_state.dart';

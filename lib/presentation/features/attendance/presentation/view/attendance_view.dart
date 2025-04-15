@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kwasu_app/presentation/features/dashboard/presentation/notifier/get_user_details_notifier.dart';
+import 'package:kwasu_app/presentation/features/home/presentation/notifier/get_user_details_notifier.dart';
 import 'package:kwasu_app/presentation/general_widgets/custom_app_bar.dart';
 
 class AttendanceView extends ConsumerStatefulWidget {

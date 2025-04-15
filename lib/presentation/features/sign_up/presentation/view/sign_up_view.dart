@@ -69,66 +69,68 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
             padding: const EdgeInsets.symmetric(vertical: 190),
             child: Image.asset('assets/images/auth_backdrop.png'),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            child: Column(
-              children: [
-                AuthHeader(
-                  title: 'Get started',
-                  subTitle: 'Already have an account?',
-                  textButton: 'Login',
-                  onTap: () => context.pushNamed(LoginView.routeName),
-                ),
-                const VerticalSpacing(16),
-                AppTextFieldWidget(
-                  controller: _nameController,
-                  title: 'Name',
-                  hintText: 'Enter your name',
-                ),
-                const VerticalSpacing(15),
-                AppTextFieldWidget(
-                  controller: _emailController,
-                  title: 'Email',
-                  hintText: 'Enter your email',
-                ),
-                const VerticalSpacing(15),
-                AppTextFieldWidget(
-                  controller: _passwordController,
-                  title: 'Password',
-                  hintText: 'Enter your password',
-                ),
-                const VerticalSpacing(15),
-                AppTextFieldWidget(
-                  controller: _matricNumberController,
-                  title: 'Matric Number',
-                  hintText: 'Enter your matic number',
-                ),
-                const VerticalSpacing(15),
-                AppDropDownWidget(
-                  selectedItem: selectedLevel,
-                  hintText: 'Select your level',
-                  title: 'Level',
-                  items: studentLevels,
-                  itemToString: (user) {
-                    return user;
-                  },
-                  onChanged: (value) {
-                    setState(() {
-                      selectedLevel = value;
-                    });
-                  },
-                ),
-                VerticalSpacing(90),
-                ValueListenableBuilder(
-                    valueListenable: _isLoginEnabled,
-                    builder: (context, r, c) {
-                      return AppSendButton(
-                        isEnabled: r,
-                        onTap: () => _signUp(),
-                        title: 'Sign up',
-                      );
-                    })
-              ],
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              child: Column(
+                children: [
+                  AuthHeader(
+                    title: 'Get started',
+                    subTitle: 'Already have an account?',
+                    textButton: 'Login',
+                    onTap: () => context.pushNamed(LoginView.routeName),
+                  ),
+                  const VerticalSpacing(16),
+                  AppTextFieldWidget(
+                    controller: _nameController,
+                    title: 'Name',
+                    hintText: 'Enter your name',
+                  ),
+                  const VerticalSpacing(15),
+                  AppTextFieldWidget(
+                    controller: _emailController,
+                    title: 'Email',
+                    hintText: 'Enter your email',
+                  ),
+                  const VerticalSpacing(15),
+                  AppTextFieldWidget(
+                    controller: _passwordController,
+                    title: 'Password',
+                    hintText: 'Enter your password',
+                  ),
+                  const VerticalSpacing(15),
+                  AppTextFieldWidget(
+                    controller: _matricNumberController,
+                    title: 'Matric Number',
+                    hintText: 'Enter your matic number',
+                  ),
+                  const VerticalSpacing(15),
+                  AppDropDownWidget(
+                    selectedItem: selectedLevel,
+                    hintText: 'Select your level',
+                    title: 'Level',
+                    items: studentLevels,
+                    itemToString: (user) {
+                      return user;
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        selectedLevel = value;
+                      });
+                    },
+                  ),
+                  VerticalSpacing(90),
+                  ValueListenableBuilder(
+                      valueListenable: _isLoginEnabled,
+                      builder: (context, r, c) {
+                        return AppSendButton(
+                          isEnabled: r,
+                          onTap: () => _signUp(),
+                          title: 'Sign up',
+                        );
+                      })
+                ],
+              ),
             ),
           ),
         ],

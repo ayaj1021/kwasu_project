@@ -46,7 +46,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
           ),
           unselectedLabelStyle: AppTextStyles.bodysmall.copyWith(
             fontWeight: FontWeight.w600,
-            color: AppColors.primaryColor,
+            // color: AppColors.secondaryColor,
           ),
           onTap: changeIndex,
           items: [

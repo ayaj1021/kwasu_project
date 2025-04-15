@@ -3,12 +3,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kwasu_app/core/theme/app_text.dart';
 import 'package:kwasu_app/core/theme/colors.dart';
 import 'package:kwasu_app/core/utils/spacing.dart';
+import 'package:kwasu_app/presentation/features/home/data/model/get_group_info_response.dart';
 
 class GroupInfoSection extends StatelessWidget {
-  const GroupInfoSection({super.key});
+  const GroupInfoSection({super.key, required this.groupList});
+  final List<GetGroupInfoData> groupList;
 
   @override
   Widget build(BuildContext context) {
+    final groupNumber = groupList.map((e) => e.members).toList();
+    final groupName = groupList.map((e) => e.name).toList();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -24,17 +28,18 @@ class GroupInfoSection extends StatelessWidget {
             GroupInfoContainer(
               icon: 'assets/icons/group_name_icon.svg',
               title: 'Group',
-              subTitle: 'Xavier',
+              subTitle: '${groupName.first}',
             ),
             GroupInfoContainer(
               icon: 'assets/icons/group_number_icon.svg',
               title: 'Group number',
-              subTitle: '39',
+              // subTitle: '${groupNumber.map((e) => e?.length).toList()}',
+              subTitle: '${groupNumber.first?.length}',
             ),
             GroupInfoContainer(
               icon: 'assets/icons/whatsapp.svg',
               title: 'Group',
-              subTitle: 'Whatsapp link',
+              subTitle: 'Whatsapp',
             )
           ],
         )
@@ -56,7 +61,8 @@ class GroupInfoContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      width: MediaQuery.sizeOf(context).width * 0.3,
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(10),
@@ -66,18 +72,22 @@ class GroupInfoContainer extends StatelessWidget {
           Stack(
             children: [
               Container(
-                padding: EdgeInsets.all(8),
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(6),
                 decoration: BoxDecoration(
                     border: Border.all(
                       width: 4,
                       color: Colors.transparent,
                     ),
                     shape: BoxShape.circle),
-                child: SvgPicture.asset(icon),
+                child: SvgPicture.asset(
+                  icon,
+                  fit: BoxFit.scaleDown,
+                ),
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.1,
-                padding: EdgeInsets.all(6.5),
+                padding: EdgeInsets.all(6),
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 4,
@@ -89,10 +99,10 @@ class GroupInfoContainer extends StatelessWidget {
               )
             ],
           ),
-          HorizontalSpacing(4),
+          HorizontalSpacing(3),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.14,
@@ -106,7 +116,7 @@ class GroupInfoContainer extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.14,
+                width: MediaQuery.of(context).size.width * 0.1,
                 child: Text(
                   subTitle,
                   style: AppTextStyles.headlineLarge.copyWith(

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kwasu_app/config/app_constants.dart';
 import 'package:kwasu_app/config/base_response.dart';
 import 'package:kwasu_app/exceptions/app_exception.dart';
-import 'package:kwasu_app/presentation/features/dashboard/data/model/user_details_response.dart';
+import 'package:kwasu_app/presentation/features/home/data/model/user_details_response.dart';
 import 'package:kwasu_app/services/api_service.dart';
 
 class UserDetailsRepository {

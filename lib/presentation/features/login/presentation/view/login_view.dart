@@ -60,39 +60,42 @@ class _LoginViewState extends ConsumerState<LoginView> {
               padding: const EdgeInsets.symmetric(vertical: 190),
               child: Image.asset('assets/images/auth_backdrop.png'),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              child: Column(
-                children: [
-                  AuthHeader(
-                    title: 'Welcome back',
-                    subTitle: 'Don\'t have an account?',
-                    textButton: 'Sign up',
-                    onTap: () => context.pushNamed(SignUpView.routeName),
-                  ),
-                  const VerticalSpacing(16),
-                  AppTextFieldWidget(
-                    controller: _emailController,
-                    title: 'Name',
-                    hintText: 'Enter your name',
-                  ),
-                  const VerticalSpacing(15),
-                  AppTextFieldWidget(
-                    controller: _passwordController,
-                    title: 'Password',
-                    hintText: 'Enter your password',
-                  ),
-                  const VerticalSpacing(45),
-                  ValueListenableBuilder(
-                      valueListenable: _isLoginEnabled,
-                      builder: (context, r, c) {
-                        return AppSendButton(
-                          isEnabled: r,
-                          onTap: () => _login(),
-                          title: 'Login',
-                        );
-                      })
-                ],
+            SingleChildScrollView(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                child: Column(
+                  children: [
+                    AuthHeader(
+                      title: 'Welcome back',
+                      subTitle: 'Don\'t have an account?',
+                      textButton: 'Sign up',
+                      onTap: () => context.pushNamed(SignUpView.routeName),
+                    ),
+                    const VerticalSpacing(16),
+                    AppTextFieldWidget(
+                      controller: _emailController,
+                      title: 'Name',
+                      hintText: 'Enter your name',
+                    ),
+                    const VerticalSpacing(15),
+                    AppTextFieldWidget(
+                      controller: _passwordController,
+                      title: 'Password',
+                      hintText: 'Enter your password',
+                    ),
+                    const VerticalSpacing(45),
+                    ValueListenableBuilder(
+                        valueListenable: _isLoginEnabled,
+                        builder: (context, r, c) {
+                          return AppSendButton(
+                            isEnabled: r,
+                            onTap: () => _login(),
+                            title: 'Login',
+                          );
+                        })
+                  ],
+                ),
               ),
             ),
           ],

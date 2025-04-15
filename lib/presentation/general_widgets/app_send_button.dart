@@ -37,41 +37,37 @@ class AppSendButton extends StatefulWidget {
 class _AppSendButtonState extends State<AppSendButton> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: widget.width,
-      child: InkWell(
-        onTap: widget.isEnabled ? widget.onTap : null,
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              color: widget.isEnabled
-                  ? widget.backgroundColor
-                  : AppColors.secondaryColor.withValues(alpha: 0.4),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.fromBorderSide(
-                widget.hasBorder
-                    ? BorderSide(color: widget.borderColor)
-                    : BorderSide.none,
-              )),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 128, vertical: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                widget.icon != null
-                    ? SvgPicture.asset(widget.icon.toString())
-                    : const SizedBox.shrink(),
-                const HorizontalSpacing(5),
-                Text(
-                  widget.title,
-                  style: AppTextStyles.headlineSmall.copyWith(
-                    color: widget.textColor,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
+    return InkWell(
+      onTap: widget.isEnabled ? widget.onTap : null,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+        width: widget.width,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: widget.isEnabled
+                ? widget.backgroundColor
+                : AppColors.secondaryColor.withValues(alpha: 0.4),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.fromBorderSide(
+              widget.hasBorder
+                  ? BorderSide(color: widget.borderColor)
+                  : BorderSide.none,
+            )),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            widget.icon != null
+                ? SvgPicture.asset(widget.icon.toString())
+                : const SizedBox.shrink(),
+            const HorizontalSpacing(5),
+            Text(
+              widget.title,
+              style: AppTextStyles.headlineSmall.copyWith(
+                color: widget.textColor,
+                fontSize: 14,
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
