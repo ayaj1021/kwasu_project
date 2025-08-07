@@ -5,6 +5,7 @@ import 'package:kwasu_app/core/utils/spacing.dart';
 import 'package:kwasu_app/presentation/features/home/presentation/notifier/get_group_info_notifier.dart';
 import 'package:kwasu_app/presentation/features/home/presentation/notifier/get_user_details_notifier.dart';
 import 'package:kwasu_app/presentation/features/home/presentation/view/drawer_view.dart';
+import 'package:kwasu_app/presentation/features/home/presentation/widgets/completed_practical.dart';
 import 'package:kwasu_app/presentation/features/home/presentation/widgets/dashboard_header.dart';
 import 'package:kwasu_app/presentation/features/home/presentation/widgets/group_info_section.dart';
 import 'package:kwasu_app/presentation/features/home/presentation/widgets/pratical_information_section.dart';
@@ -54,20 +55,24 @@ class _HomeViewState extends ConsumerState<HomeView> {
         userCourse: '',
       ),
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-        child: Column(
-          children: [
-            DashBoardHeader(userName: userName),
-            VerticalSpacing(11),
-            GroupInfoSection(
-              groupList: groupList ?? [],
-            ),
-            VerticalSpacing(19),
-            TaskCompletionGraph(),
-            VerticalSpacing(10),
-            PracticalInformationSection()
-          ],
+          child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          child: Column(
+            children: [
+              DashBoardHeader(userName: userName),
+              VerticalSpacing(11),
+              GroupInfoSection(
+                groupList: groupList ?? [],
+              ),
+              VerticalSpacing(19),
+              TaskCompletionGraph(),
+              VerticalSpacing(10),
+              PracticalInformationSection(),
+              VerticalSpacing(10),
+              CompletedPractical(),
+            ],
+          ),
         ),
       )),
     );

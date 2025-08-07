@@ -3,7 +3,8 @@ import 'package:kwasu_app/core/extensions/navigation.dart';
 import 'package:kwasu_app/core/theme/app_text.dart';
 import 'package:kwasu_app/core/theme/colors.dart';
 import 'package:kwasu_app/core/utils/spacing.dart';
-import 'package:kwasu_app/presentation/general_widgets/cac/presentation/view/cac_view.dart';
+import 'package:kwasu_app/presentation/features/assignments/presentation/view/assignment_view.dart';
+import 'package:kwasu_app/presentation/features/receipts/presentation/view/receipt_view.dart';
 
 class DrawerView extends StatelessWidget {
   const DrawerView({super.key});
@@ -23,16 +24,18 @@ class DrawerView extends StatelessWidget {
           ),
           DrawerOptionsWidget(
             title: 'Assignments',
+            onTap: () => context.pushNamed(AssignmentView.routeName),
           ),
           VerticalSpacing(5),
           DrawerOptionsWidget(
             title: 'Receipts',
+            onTap: () => context.pushNamed(ReceiptView.routeName),
           ),
-          VerticalSpacing(5),
-          DrawerOptionsWidget(
-            title: 'CAC Registration',
-            onTap: () => context.pushNamed(CacView.routeName),
-          ),
+          // VerticalSpacing(5),
+          // DrawerOptionsWidget(
+          //   title: 'CAC Registration',
+          //   onTap: () => context.pushNamed(CacView.routeName),
+          // ),
           VerticalSpacing(5),
           DrawerOptionsWidget(
             title: 'Logout',

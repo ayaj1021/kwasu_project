@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
+import 'package:kwasu_app/presentation/features/assignments/presentation/view/assignment_view.dart';
 import 'package:kwasu_app/presentation/features/dashboard/presentation/view/dashboard_view.dart';
 import 'package:kwasu_app/presentation/features/login/presentation/view/login_view.dart';
+import 'package:kwasu_app/presentation/features/receipts/presentation/view/receipt_view.dart';
 import 'package:kwasu_app/presentation/features/sign_up/presentation/view/sign_up_view.dart';
 import 'package:kwasu_app/presentation/general_widgets/cac/presentation/view/cac_view.dart';
 import 'package:kwasu_app/presentation/general_widgets/splash_screen.dart';
@@ -12,6 +14,8 @@ class AppRouter {
     SignUpView.routeName: (context) => const SignUpView(),
     DashboardView.routeName: (context) => const DashboardView(),
     CacView.routeName: (context) => const CacView(),
+    ReceiptView.routeName: (context) => const ReceiptView(),
+    AssignmentView.routeName: (context) => const AssignmentView(),
   };
 
   static Map<String, Widget Function(BuildContext)> get routes => _routes;

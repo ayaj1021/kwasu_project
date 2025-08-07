@@ -35,8 +35,7 @@ class _MyAppState extends State<MyApp> {
               child: AppOverLay(
                 controller: _controller,
                 child: MaterialApp(
-                  theme: ThemeData(
-                      scaffoldBackgroundColor: AppColors.primaryE3F5E3),
+                  theme: ThemeData(scaffoldBackgroundColor: AppColors.white),
                   debugShowCheckedModeBanner: false,
                   routes: AppRouter.routes,
                   initialRoute: '/',

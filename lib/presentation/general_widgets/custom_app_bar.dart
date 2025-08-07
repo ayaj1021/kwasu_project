@@ -92,6 +92,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       HorizontalSpacing(5),
                       CircleAvatar(
                         radius: 20,
+                        backgroundImage:
+                            AssetImage('assets/images/user_profile.jpg'),
                       )
                     ],
                   )

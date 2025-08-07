@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kwasu_app/core/theme/colors.dart';
 import 'package:kwasu_app/core/utils/spacing.dart';
 import 'package:kwasu_app/presentation/features/home/presentation/notifier/get_user_details_notifier.dart';
+import 'package:kwasu_app/presentation/features/home/presentation/view/drawer_view.dart';
 import 'package:kwasu_app/presentation/features/skill/presentation/notifier/get_all_skills_notifier.dart';
 import 'package:kwasu_app/presentation/features/skill/presentation/widgets/course_code_section.dart';
 import 'package:kwasu_app/presentation/general_widgets/custom_app_bar.dart';
@@ -29,6 +30,10 @@ class _SkillViewState extends ConsumerState<SkillView> {
     final userName = ref.watch(getUserDetailsNotifier.select((v) => v.data));
     return Scaffold(
       backgroundColor: AppColors.white,
+      drawer: Drawer(
+        backgroundColor: AppColors.white,
+        child: DrawerView(),
+      ),
       appBar: CustomAppBar(
         backgroundColor: Colors.transparent,
         userName: '${userName?.firstName} ${userName?.lastName}',

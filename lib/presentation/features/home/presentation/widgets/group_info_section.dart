@@ -22,27 +22,37 @@ class GroupInfoSection extends StatelessWidget {
               .copyWith(fontSize: 14, color: AppColors.primaryColor),
         ),
         VerticalSpacing(3),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GroupInfoContainer(
-              icon: 'assets/icons/group_name_icon.svg',
-              title: 'Group',
-              subTitle: '${groupName.first}',
-            ),
-            GroupInfoContainer(
-              icon: 'assets/icons/group_number_icon.svg',
-              title: 'Group number',
-              // subTitle: '${groupNumber.map((e) => e?.length).toList()}',
-              subTitle: '${groupNumber.first?.length}',
-            ),
-            GroupInfoContainer(
-              icon: 'assets/icons/whatsapp.svg',
-              title: 'Group',
-              subTitle: 'Whatsapp',
-            )
-          ],
-        )
+        groupList.isEmpty
+            ? Center(
+                child: Text(
+                  'No group information available',
+                  style: AppTextStyles.headlineLarge,
+                ),
+              )
+            : const SizedBox(),
+        groupList.isEmpty
+            ? SizedBox()
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GroupInfoContainer(
+                    icon: 'assets/icons/group_name_icon.svg',
+                    title: 'Group',
+                    subTitle: groupName.map((e) => e).first ?? '',
+                  ),
+                  GroupInfoContainer(
+                    icon: 'assets/icons/group_number_icon.svg',
+                    title: 'Group number',
+                    // subTitle: '${groupNumber.map((e) => e?.length).toList()}',
+                    subTitle: '${groupNumber.first?.length}',
+                  ),
+                  // GroupInfoContainer(
+                  //   icon: 'assets/icons/whatsapp.svg',
+                  //   title: 'Group',
+                  //   subTitle: 'Whatsapp',
+                  // )
+                ],
+              )
       ],
     );
   }

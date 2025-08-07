@@ -24,6 +24,7 @@ class PracticalInformationSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'List of Available Practical',
@@ -32,9 +33,60 @@ class PracticalInformationSection extends StatelessWidget {
               ),
               VerticalSpacing(12),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Task'),
-                  Text('Due Date'),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Task',
+                          style: AppTextStyles.headlineMedium.copyWith(),
+                        ),
+                        VerticalSpacing(5),
+                        Row(
+                          children: [
+                            Container(
+                              height: 15,
+                              width: 15,
+                              decoration: BoxDecoration(
+                                color: AppColors.primaryE8BB78,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                            ),
+                            HorizontalSpacing(5),
+                            Text(
+                              'Breeding of Tilapia Fish',
+                              style: AppTextStyles.headlineMedium.copyWith(
+                                color: AppColors.primary262626,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Due Date',
+                          style: AppTextStyles.headlineLarge.copyWith(
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                        Text(
+                          'Aug 17, 2024, 11:59pm',
+                          style: AppTextStyles.headlineMedium.copyWith(
+                            color: AppColors.primary262626,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               )
             ],
